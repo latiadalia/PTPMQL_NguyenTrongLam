@@ -1,14 +1,38 @@
-<form asp-action="Index">
-    <label>Nhập PersonID:</label>
-    <input type="text" name="PersonId">
+@model IEnumerable<DemoMVC.Models.Person>
 
-    <label>Nhập họ tên:</label>
-    <input type="text" name="FullName">
+@{
+    ViewData["Title"] = "Danh sách Person";
+}
 
-    <label>Nhập địa chỉ:</label>
-    <input type="text" name="Address">
+<h1>Danh sách Person</h1>
 
-    <input type="submit" value="Gửi dữ liệu">
-</form>
+<p>
+    <a asp-action="Create">Tạo mới</a>
+</p>
 
-<h1>@ViewBag.Message</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.PersonId)</th>
+            <th>@Html.DisplayNameFor(model => model.FullName)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.PersonId)</td>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PersonId">Sửa</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PersonId">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

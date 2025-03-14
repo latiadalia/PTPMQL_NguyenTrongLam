@@ -1,21 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.JSInterop.Infrastructure;
-using MvcMovie.Models;
+using DemoMVC.Models;
 
-namespace MvcMovie.Controllers
+namespace DemoMVC.Controllers
 {
     public class InvoiceController : Controller
     {
-        public IActionResult Index(double quantity = 0, double unitPrice = 0)
+        [HttpGet]
+        public IActionResult Index()
         {
-            var model = new InvoiceModel
-            {
-                Quantity = quantity,
-                UnitPrice = unitPrice
-            };
-
-            ViewBag.Total = model.Index().ToString("N0") + " VND"; // Gọi Index() thay vì CalculateTotal()
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(Invoice model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.TotalPrice = GetTotalPrice(model.Quantity, model.UnitPrice);
+                string strOutput = $"Số lượng: {model.Quantity} - Đơn giá: {model.UnitPrice:C2} - Tổng tiền: {model.TotalPrice:C2}";
+                ViewBag.infoInvoice = strOutput;
+            }
+            return View(model);
+        }
+
+        private decimal GetTotalPrice(int quantity, decimal unitPrice)
+        {
+            return quantity * unitPrice;
         }
     }
 }

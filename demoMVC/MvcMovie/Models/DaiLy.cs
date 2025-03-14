@@ -1,4 +1,4 @@
-namespace MvcMovie.Models
+namespace DemoMVC.Models
 {
     public class DaiLy
     {
@@ -7,19 +7,6 @@ namespace MvcMovie.Models
         public string DiaChi { get; set; }
         public string NguoiDaiDien { get; set; }
         public string DienThoai { get; set; }
-        public string MaHTPP { get; set; }  // Khóa ngoại liên kết với HeThongPhanPhoi
-
-        public DaiLy()
-        {
-            MaDaiLy = string.Empty;
-            TenDaiLy = string.Empty;
-            DiaChi = string.Empty;
-            NguoiDaiDien = string.Empty;
-            DienThoai = string.Empty;
-            MaHTPP = string.Empty;
-        }
-
-        // Liên kết với HeThongPhanPhoi
-        public HeThongPhanPhoi? HeThongPhanPhoi { get; set; }
+        public string MaHTPP { get; set; }
     }
 }

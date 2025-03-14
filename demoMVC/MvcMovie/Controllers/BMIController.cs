@@ -23,7 +23,6 @@ namespace DemoMVC.Controllers
 
         private float GetBMIValue(float height, float weight)
         {
-            // Chuyển đổi chiều cao từ cm sang m
             float heightInMeters = height / 100f;
             return weight / (heightInMeters * heightInMeters);
         }
